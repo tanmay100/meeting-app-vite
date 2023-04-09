@@ -2,7 +2,7 @@
   <div class="flex justify-center items-center h-screen">
     <div class="w-96 bg-white rounded-lg shadow-md p-8">
       <div v-if="!showRegisterForm">
-        <h2 class="text-xl font-bold mb-6">Login</h2>
+        <h2 class="text-xl font-bold mb-6">Register</h2>
         <form>
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="username">
@@ -60,7 +60,7 @@
       </div>
 
       <div v-if="showRegisterForm" class="mt-8 border-t border-gray-400 pt-8">
-        <h2 class="text-xl font-bold mb-6">Register</h2>
+        <h2 class="text-xl font-bold mb-6">Login</h2>
         <form>
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="email">
@@ -117,6 +117,7 @@
 </template>
 
 <script>
+const api_base_url = `https://mymeetingsapp.herokuapp.com/api`;
 export default {
   name: "Login",
 
@@ -136,16 +137,13 @@ export default {
         password: this.password,
       };
 
-      let response = await fetch(
-        `https://mymeetingsapp.herokuapp.com/api/auth/register`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      let response = await fetch(`${api_base_url}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
       debugger;
       console.log(response);
     },
